@@ -32,13 +32,13 @@
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2>$0</h2>
+                    <h2>$ <span id="withdrawText">0</span> </h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$1340</h2>
+                    <h2>$ <span id="balanceText">1340</span> </h2>
                 </div>
             </div>
         </div>
@@ -67,16 +67,39 @@
             document.getElementById('transaction-container').style.display="block";
         });
 
+        
+
         //handeling diposit button
         document.getElementById('dipositButton').addEventListener('click',function(){
             var deposit=document.getElementById('dipositInput').value;
             var depositValue= parseFloat(deposit);
+
+            changeSpanText('dipositText',depositValue);
+            changeSpanText('balanceText',depositValue);
             
-            var currentDeposit= parseFloat( document.getElementById('dipositText').innerText);
-            currentDeposit+=depositValue;
-            document.getElementById('dipositText').innerText=currentDeposit;
+            
             document.getElementById('dipositInput').value="";
-        })
+        });
+
+        document.getElementById('withdrawButton').addEventListener('click',function(){
+            var withdraw=document.getElementById('withdrawInput').value;
+            var withdrawValue= parseFloat(withdraw);
+
+            changeSpanText('withdrawText',withdrawValue);
+            changeSpanText('balanceText', -1* withdrawValue);
+            
+            
+            document.getElementById('dipositInput').value="";
+        });
+
+
+        function changeSpanText(id,value){
+            var current= parseFloat( document.getElementById(id).innerText);
+            current+=value;
+            document.getElementById(id).innerText=current;
+        }
+
+
     </script>
 
 
